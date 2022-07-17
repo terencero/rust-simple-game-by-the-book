@@ -6,7 +6,7 @@ fn main() {
     println!("What would you like to do?");
     println!("Play the Guessing Game [1]");
     println!("Convert the current temperature [2]");
-
+    println!("Sing me a Christmas song [3]");
     let mut answer = String::new();
 
     io::stdin()
@@ -19,6 +19,8 @@ fn main() {
         play_the_guessing_game();
     } else if answer == "2" {
         convert_temperature();
+    } else if answer == "3" {
+        print_the_lyrics_to_the_twelve_days_of_christmas();
     } else {
         println!("Aww you didn't choose an option... Till next time!");
     }
@@ -112,4 +114,59 @@ fn convert_temperature() {
 fn print_temperature_conversion(original_temperature_unit: f64, converted_temperature_unit: f64, original_scale: &str) {
     let scale = if original_scale == "c" { "f" } else { "c" };
     println!("{original_temperature_unit} degrees {original_scale} is {converted_temperature_unit} degrees in {scale}");
+}
+
+fn print_the_lyrics_to_the_twelve_days_of_christmas() {
+    let days = [
+        ("first", ""),
+        ("second", "Two"),
+        ("third", "Three"),
+        ("fourth", "Four"),
+        ("fifth", "Five"),
+        ("sixth", "Six"),
+        ("seventh", "Seven"),
+        ("eighth", "Eight"),
+        ("ninth", "Nine"),
+        ("tenth", "Ten"),
+        ("eleventh", "Eleven"),
+        ("twelfth", "Twelve"),
+    ];
+    for day in 0..12 {
+        let chorus_line = days[day];
+        let chorus_line = get_the_chorus_line(chorus_line.0);
+        println!("{chorus_line}");
+
+        if day > 0 {
+            for element in 0..day {
+                let next_line = get_next_line(element);
+                let and = if element + 1 == day { ", and" } else { "" };
+                let day = days[element + 1].1;
+                println!("{day} {next_line}{and}");
+            }
+        }
+
+        println!("A partridge in a pear tree");
+        println!("");
+    };
+}
+
+fn get_the_chorus_line(day: &str) -> String {
+   format!("On the {} day of Christmas, my true love sent to me", day)
+}
+
+fn get_next_line(day: usize) -> &'static str {
+    let lines = [
+        "turtle doves",
+        "french hens",
+        "calling birds",
+        "golden rings",
+        "geese a-laying",
+        "swans a-swimming",
+        "maids a-milking",
+        "ladies dancing",
+        "lords a-leaping",
+        "pipers piping",
+        "drummers drumming",
+    ];
+    lines[day]
 }
