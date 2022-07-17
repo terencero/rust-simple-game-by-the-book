@@ -170,3 +170,53 @@ fn get_next_line(day: usize) -> &'static str {
     ];
     lines[day]
 }
+
+fn calculate_fibonacci() {
+    let mut lower_range = String::new();
+    let mut upper_range = String::new();
+
+    println!("Choose starting and ending number ranges up to 1,000");
+    println!("Enter the starting number");
+
+    io::stdin()
+        .read_line(&mut lower_range)
+        .expect("Failed to read line");
+        
+    let lower_range: u32 = lower_range.trim().parse().expect("Not a number");
+    println!("Enter the ending number");
+
+    io::stdin()
+        .read_line(&mut upper_range)
+        .expect("Failed to read line");
+
+    let upper_range = upper_range.trim().parse().expect("Not a number");
+    
+    let first_fibonacci_number = for num in lower_range..upper_range {
+        let fibonacci_potential = 5 * num * num + 4;
+        let is_perfect_square = test_is_perfect_square(fibonacci_potential);
+        
+        if is_perfect_square {
+            lower_range;
+        }
+    };
+    
+}
+
+fn test_is_perfect_square(num: u32) -> bool {
+    let start: f64 = num.into();
+    let mut test_num: f64 = num.into();
+    let mut is_square = false;
+
+    while test_num > 0.0 {
+        test_num = (test_num - 1.0) + start / (test_num - 1.0) / 2.0;
+        if test_num == start {
+            is_square = true;
+            break;
+        }
+    }
+    is_square
+}
+
+fn test_fibonacci(num: ) {
+
+}
