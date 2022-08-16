@@ -185,17 +185,13 @@ fn print_the_lyrics_to_the_twelve_days_of_christmas() {
     };
     for day in 0..12 {
         let chorus_line = lyrics.get_days(day);
-        // let chorus_line = days[day];
         println!("On the {} day of Christmas, my true love sent to me", chorus_line);
 
         if day > 0 {
             for element in 0..day {
-                // let next_line = get_next_line(element);
                 let num_of_presents = lyrics.get_number_of_presents(element);
                 let next_line = lyrics.get_presents(element);
                 let and = if element + 1 == day { ", and" } else { "" };
-                // let day = days[element + 1].1;
-                // let day = lyrics.get_days(day);
                 println!("{num_of_presents} {next_line}{and}");
             };
         }
