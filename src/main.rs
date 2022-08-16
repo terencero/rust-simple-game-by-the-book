@@ -122,17 +122,12 @@ fn print_temperature_conversion(original_temperature_unit: f64, converted_temper
 fn print_the_lyrics_to_the_twelve_days_of_christmas() {
     struct Lyrics {
         days: [String; 12],
-        number_of: [String; 11],
         presents: [String; 11],
     }
 
     impl Lyrics {
         fn get_days(&self, index: usize) -> &String {
             &self.days[index]
-        }
-
-        fn get_number_of_presents(&self, index: usize) -> &String {
-            &self.number_of[index]
         }
 
         fn get_presents(&self, index: usize) -> &String {
@@ -155,33 +150,19 @@ fn print_the_lyrics_to_the_twelve_days_of_christmas() {
             String::from("eleventh"),
             String::from("twelfth"),
         ],
-        number_of: [
-            String::from("Two"),
-            String::from("Three"),
-            String::from("Four"),
-            String::from("Five"),
-            String::from("Six"),
-            String::from("Seven"),
-            String::from("Eight"),
-            String::from("Nine"),
-            String::from("Ten"),
-            String::from("Eleven"),
-            String::from("Twelve"),
-        ],
         presents: [
-            String::from("turtle doves"),
-            String::from("french hens"),
-            String::from("calling birds"),
-            String::from("golden rings"),
-            String::from("geese a-laying"),
-            String::from("swans a-swimming"),
-            String::from("maids a-milking"),
-            String::from("ladies dancing"),
-            String::from("lords a-leaping"),
-            String::from("pipers piping"),
-            String::from("drummers drumming"),
+            String::from("Two turtle doves"),
+            String::from("Three french hens"),
+            String::from("Four calling birds"),
+            String::from("Five golden rings"),
+            String::from("Six geese a-laying"),
+            String::from("Seven swans a-swimming"),
+            String::from("Eight maids a-milking"),
+            String::from("Nine ladies dancing"),
+            String::from("Ten lords a-leaping"),
+            String::from("Eleven pipers piping"),
+            String::from("Twelve drummers drumming"),
         ],
-
     };
     for day in 0..12 {
         let chorus_line = lyrics.get_days(day);
@@ -189,10 +170,9 @@ fn print_the_lyrics_to_the_twelve_days_of_christmas() {
 
         if day > 0 {
             for element in 0..day {
-                let num_of_presents = lyrics.get_number_of_presents(element);
                 let next_line = lyrics.get_presents(element);
                 let and = if element + 1 == day { ", and" } else { "" };
-                println!("{num_of_presents} {next_line}{and}");
+                println!("{next_line}{and}");
             };
         }
 
