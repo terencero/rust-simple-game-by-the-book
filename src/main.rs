@@ -120,58 +120,89 @@ fn print_temperature_conversion(original_temperature_unit: f64, converted_temper
 }
 
 fn print_the_lyrics_to_the_twelve_days_of_christmas() {
-    let days = [
-        ("first", ""),
-        ("second", "Two"),
-        ("third", "Three"),
-        ("fourth", "Four"),
-        ("fifth", "Five"),
-        ("sixth", "Six"),
-        ("seventh", "Seven"),
-        ("eighth", "Eight"),
-        ("ninth", "Nine"),
-        ("tenth", "Ten"),
-        ("eleventh", "Eleven"),
-        ("twelfth", "Twelve"),
-    ];
+    struct Lyrics {
+        days: [String; 12],
+        number_of: [String; 11],
+        presents: [String; 11],
+    }
+
+    impl Lyrics {
+        fn get_days(&self, index: usize) -> &String {
+            &self.days[index]
+        }
+
+        fn get_number_of_presents(&self, index: usize) -> &String {
+            &self.number_of[index]
+        }
+
+        fn get_presents(&self, index: usize) -> &String {
+            &self.presents[index]
+        }
+    }
+
+    let lyrics = Lyrics {
+        days: [
+            String::from("first"),
+            String::from("second"),
+            String::from("third"),
+            String::from("fourth"),
+            String::from("fifth"),
+            String::from("sixth"),
+            String::from("seventh"),
+            String::from("eighth"),
+            String::from("ninth"),
+            String::from("tenth"),
+            String::from("eleventh"),
+            String::from("twelfth"),
+        ],
+        number_of: [
+            String::from("Two"),
+            String::from("Three"),
+            String::from("Four"),
+            String::from("Five"),
+            String::from("Six"),
+            String::from("Seven"),
+            String::from("Eight"),
+            String::from("Nine"),
+            String::from("Ten"),
+            String::from("Eleven"),
+            String::from("Twelve"),
+        ],
+        presents: [
+            String::from("turtle doves"),
+            String::from("french hens"),
+            String::from("calling birds"),
+            String::from("golden rings"),
+            String::from("geese a-laying"),
+            String::from("swans a-swimming"),
+            String::from("maids a-milking"),
+            String::from("ladies dancing"),
+            String::from("lords a-leaping"),
+            String::from("pipers piping"),
+            String::from("drummers drumming"),
+        ],
+
+    };
     for day in 0..12 {
-        let chorus_line = days[day];
-        let chorus_line = get_the_chorus_line(chorus_line.0);
-        println!("{chorus_line}");
+        let chorus_line = lyrics.get_days(day);
+        // let chorus_line = days[day];
+        println!("On the {} day of Christmas, my true love sent to me", chorus_line);
 
         if day > 0 {
             for element in 0..day {
-                let next_line = get_next_line(element);
+                // let next_line = get_next_line(element);
+                let num_of_presents = lyrics.get_number_of_presents(element);
+                let next_line = lyrics.get_presents(element);
                 let and = if element + 1 == day { ", and" } else { "" };
-                let day = days[element + 1].1;
-                println!("{day} {next_line}{and}");
-            }
+                // let day = days[element + 1].1;
+                // let day = lyrics.get_days(day);
+                println!("{num_of_presents} {next_line}{and}");
+            };
         }
 
         println!("A partridge in a pear tree");
         println!("");
     };
-}
-
-fn get_the_chorus_line(day: &str) -> String {
-   format!("On the {} day of Christmas, my true love sent to me", day)
-}
-
-fn get_next_line(day: usize) -> &'static str {
-    let lines = [
-        "turtle doves",
-        "french hens",
-        "calling birds",
-        "golden rings",
-        "geese a-laying",
-        "swans a-swimming",
-        "maids a-milking",
-        "ladies dancing",
-        "lords a-leaping",
-        "pipers piping",
-        "drummers drumming",
-    ];
-    lines[day]
 }
 
 fn calculate_fibonacci() {
