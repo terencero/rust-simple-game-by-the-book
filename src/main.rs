@@ -91,7 +91,7 @@ fn convert_temperature() {
         .read_line(&mut answer)
         .expect("Failed to read line");
 
-    let temperature_scale = if answer.trim() == "f" { "f" } else if answer.trim() == "c" { "c" } else { "" };
+    let mut temperature_scale = answer.trim();
 
     let mut next_answer = String::new();
 
@@ -102,22 +102,50 @@ fn convert_temperature() {
 
     let og_temperature_unit: f64 = next_answer.trim().parse().expect("Please enter a number");
 
+    struct TemperatureParts {
+        original_unit: f64,
+        converted_unit: f64,
+    }
+
+    enum ConvertedTemperature {
+        Celcius(TemperatureParts),
+        Fahrenheit(TemperatureParts),
+    }
+
     if temperature_scale == "c" {
         let temperature = (og_temperature_unit / 5.0) * 9.0 + 32.0;
-        print_temperature_conversion(og_temperature_unit, temperature, &temperature_scale);
+        let temperature_parts = TemperatureParts {
+            original_unit: og_temperature_unit,
+            converted_unit: temperature,
+        };
+        let c = ConvertedTemperature::Celcius(temperature_parts);
+
+        print_temperature_conversion(c);
     } else if temperature_scale == "f" {
         let temperature = (og_temperature_unit - 32.0) * 5.0 / 9.0;
-        print_temperature_conversion(og_temperature_unit, temperature, &temperature_scale);
+        let temperature_parts = TemperatureParts { 
+            original_unit: og_temperature_unit,
+            converted_unit: temperature,
+        };
+        let f = ConvertedTemperature::Fahrenheit(temperature_parts);
+
+        print_temperature_conversion(f);
     } else {
         println!("Not a valid temperature unit of measure");
-
     };
+
+    fn print_temperature_conversion(conversion: ConvertedTemperature) {
+        match conversion {
+            ConvertedTemperature::Celcius(temperature) => {
+                println!("{} degrees Celcius is {} degrees in Fahrenheit", temperature.original_unit, temperature.converted_unit);
+            }
+            ConvertedTemperature::Fahrenheit(temperature) => {
+                println!("{} degrees Fahrenheit is {} degrees in Celcius", temperature.original_unit, temperature.converted_unit);
+            }
+        }
+    }
 }
 
-fn print_temperature_conversion(original_temperature_unit: f64, converted_temperature_unit: f64, original_scale: &str) {
-    let scale = if original_scale == "c" { "f" } else { "c" };
-    println!("{original_temperature_unit} degrees {original_scale} is {converted_temperature_unit} degrees in {scale}");
-}
 
 fn print_the_lyrics_to_the_twelve_days_of_christmas() {
     struct Lyrics {
