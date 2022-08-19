@@ -91,7 +91,7 @@ fn convert_temperature() {
         .read_line(&mut answer)
         .expect("Failed to read line");
 
-    let mut temperature_scale = answer.trim();
+    let temperature_scale = answer.trim();
 
     let mut next_answer = String::new();
 
