@@ -102,48 +102,44 @@ fn convert_temperature() {
 
     let og_temperature_unit: f64 = next_answer.trim().parse().expect("Please enter a number");
 
+    #[derive(Debug)]
     struct TemperatureParts {
         original_unit: f64,
-        converted_unit: f64,
     }
 
+    impl TemperatureParts {
+        fn convert_celcius_to_fahrenheit(&self) -> f64 {
+            (self.original_unit / 5.0) * 9.0 + 32.0
+        }
+
+        fn convert_fahrenheit_to_celcius(&self) -> f64 {
+            (self.original_unit - 32.0) * 5.0 / 9.0
+        }
+    }
+
+    #[derive(Debug)]
     enum ConvertedTemperature {
         Celcius(TemperatureParts),
         Fahrenheit(TemperatureParts),
     }
 
-    if temperature_scale == "c" {
-        let temperature = (og_temperature_unit / 5.0) * 9.0 + 32.0;
-        let temperature_parts = TemperatureParts {
-            original_unit: og_temperature_unit,
-            converted_unit: temperature,
-        };
-        let c = ConvertedTemperature::Celcius(temperature_parts);
-
-        print_temperature_conversion(c);
-    } else if temperature_scale == "f" {
-        let temperature = (og_temperature_unit - 32.0) * 5.0 / 9.0;
-        let temperature_parts = TemperatureParts { 
-            original_unit: og_temperature_unit,
-            converted_unit: temperature,
-        };
-        let f = ConvertedTemperature::Fahrenheit(temperature_parts);
-
-        print_temperature_conversion(f);
-    } else {
-        println!("Not a valid temperature unit of measure");
+    let temperature_parts = TemperatureParts {
+        original_unit: og_temperature_unit,
     };
 
-    fn print_temperature_conversion(conversion: ConvertedTemperature) {
-        match conversion {
-            ConvertedTemperature::Celcius(temperature) => {
-                println!("{} degrees Celcius is {} degrees in Fahrenheit", temperature.original_unit, temperature.converted_unit);
+    match temperature_scale {
+        "c" => {
+            if let ConvertedTemperature::Celcius(temperature) = ConvertedTemperature::Celcius(temperature_parts) {
+                println!("{} degrees Celcius is {} degrees in Fahrenheit", temperature.original_unit, temperature.convert_celcius_to_fahrenheit());
             }
-            ConvertedTemperature::Fahrenheit(temperature) => {
-                println!("{} degrees Fahrenheit is {} degrees in Celcius", temperature.original_unit, temperature.converted_unit);
+        },
+        "f" => {
+            if let ConvertedTemperature::Fahrenheit(temperature) = ConvertedTemperature::Fahrenheit(temperature_parts) {
+                println!("{} degrees Fahrenheit is {} degrees in Celcius", temperature.original_unit, temperature.convert_fahrenheit_to_celcius());
             }
-        }
-    }
+        },
+        _ => println!("Not a valid unit of measure."),
+    };
 }
 
 
