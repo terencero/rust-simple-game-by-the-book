@@ -1,9 +1,9 @@
 use std::io;
 
-use guessing_game::play_the_guessing_game;
-use temperature::convert_temperature;
-use lyrics::print_the_lyrics_to_the_twelve_days_of_christmas;
-use fibonacci::calculate_fibonacci;
+// use self::guessing_gam;
+// use temperature;
+// use lyrics;
+// use fibonacci;
 
 pub mod guessing_game;
 pub mod temperature;
@@ -25,13 +25,13 @@ fn main() {
     let answer = answer.trim();
 
     if answer == "1" {
-        play_the_guessing_game();
+        guessing_game::play_the_guessing_game();
     } else if answer == "2" {
-        convert_temperature();
+        temperature::convert_temperature();
     } else if answer == "3" {
-        print_the_lyrics_to_the_twelve_days_of_christmas();
+        lyrics::print_the_lyrics_to_the_twelve_days_of_christmas();
     } else if answer == "4" {
-        calculate_fibonacci()
+        fibonacci::calculate_fibonacci();
     } else {
         println!("Aww you didn't choose an option... Till next time!");
     }

@@ -1,5 +1,5 @@
 use std::io;
-use perfect_square::test_is_perfect_square;
+// use crate::fibonacci::perfect_square;
 
 pub mod perfect_square;
 
@@ -32,11 +32,11 @@ pub fn calculate_fibonacci() {
             break;
         }
         let fibonacci_potential = 5 * current_fibonacci_test_num * current_fibonacci_test_num + 4;
-        let is_perfect_square = if test_is_perfect_square(fibonacci_potential) {
+        let is_perfect_square = if perfect_square::test_is_perfect_square(fibonacci_potential) {
             true
         } else {
             let fibonacci_potential = 5 * current_fibonacci_test_num * current_fibonacci_test_num - 4;
-            test_is_perfect_square(fibonacci_potential)
+            perfect_square::test_is_perfect_square(fibonacci_potential)
         };
         
         if is_perfect_square {
