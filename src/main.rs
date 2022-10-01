@@ -1,14 +1,10 @@
 use std::io;
 
-// use self::guessing_gam;
-// use temperature;
-// use lyrics;
-// use fibonacci;
-
 pub mod guessing_game;
 pub mod temperature;
 pub mod lyrics;
 pub mod fibonacci;
+pub mod speaker_randomizer;
 
 fn main() {
     println!("What would you like to do?");
@@ -16,6 +12,8 @@ fn main() {
     println!("Convert the current temperature [2]");
     println!("Sing me a Christmas song [3]");
     println!("Print the fibonacci sequence [4]");
+    println!("Randomize speakers [5]");
+
     let mut answer = String::new();
 
     io::stdin()
@@ -32,6 +30,8 @@ fn main() {
         lyrics::print_the_lyrics_to_the_twelve_days_of_christmas();
     } else if answer == "4" {
         fibonacci::calculate_fibonacci();
+    } else if answer == "5" {
+        speaker_randomizer::randomize_names();
     } else {
         println!("Aww you didn't choose an option... Till next time!");
     }
