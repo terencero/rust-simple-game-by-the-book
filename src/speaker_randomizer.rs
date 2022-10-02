@@ -1,19 +1,72 @@
+use std::{io, vec};
 use rand::Rng;
 
 pub fn randomize_names() {
     let mut names = vec!["Val", "Ben", "JVE", "Anil", "Sonika", "tRo", "Brandon", "Nadiya", "Andre"];
+    let mut answer = String::new();
 
-    print_name(&mut names);
+    println!("Generate all speaker names [1] or get one [2]?");
+
+    io::stdin()
+        .read_line(&mut answer)
+        .expect("Failed to read your answer...");
+
+    let answer = answer.trim();
+
+    if answer == "1" {
+        print_names(&mut names);
+    } else if answer == "2" {
+        pick_one_speaker();
+    } else {
+        println!("You didn't pick a valid option...");
+    }
 }
 
-fn print_name(names: &mut Vec<&str>) {
+fn print_names(names: &mut Vec<&str>) {
     let name = pull_name_from_hat(names);
 
     println!("{name}");
 
     if names.len() > 0 {
-        print_name(names);
+        print_names(names);
     }
+}
+
+fn pick_one_speaker() {
+    let mut list_of_names = String::new();
+    
+    io::stdin()
+    .read_line(&mut list_of_names)
+    .expect("Failed to read the names...");
+    
+    let list_of_names = list_of_names.trim();
+    let mut speaker_candidates = read_list_of_names(list_of_names);
+    
+    let selected_speaker = pull_name_from_hat(&mut speaker_candidates);
+
+    println!("{selected_speaker}");
+}
+
+fn read_list_of_names(names: &str) -> Vec<&str> {
+    let mut speaker_candidates: Vec<&str> = Vec::new();
+    let bytes = names.as_bytes();
+    let mut starting_string_index = 0;
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            starting_string_index = if starting_string_index > 0 {
+                starting_string_index + 1
+            } else {
+                starting_string_index
+            };
+
+            let n = &names[starting_string_index..i];
+
+            speaker_candidates.push(n);
+            starting_string_index = i;
+        }
+    }
+    speaker_candidates
 }
 
 fn pull_name_from_hat(names: &mut Vec<&str>) -> String {
