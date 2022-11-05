@@ -58,7 +58,7 @@ pub fn find_median() {
 
 		println!("The median is {median}");
 	} else {
-		let median_position = (integer_list_len as f32 / 2.0).ceil() as usize;
+		let median_position = (integer_list_len as f32 / 2.0 - 1.0).ceil() as usize;
 		let median = integer_list[median_position];
 
 		println!("The median is {median}");
