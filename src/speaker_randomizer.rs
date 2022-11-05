@@ -49,7 +49,7 @@ fn pick_one_speaker() {
 
 fn read_list_of_names(names: &str) -> Vec<&str> {
     let mut speaker_candidates: Vec<&str> = Vec::new();
-    let bytes = names.as_bytes();
+    let bytes = names.trim().as_bytes();
     let mut starting_string_index = 0;
 
     for (i, &item) in bytes.iter().enumerate() {
@@ -65,7 +65,16 @@ fn read_list_of_names(names: &str) -> Vec<&str> {
             speaker_candidates.push(n);
             starting_string_index = i;
         }
+
+        if i == bytes.len() - 1 {
+            let n = &names[starting_string_index + 1..];
+
+            speaker_candidates.push(n);
+        }
     }
+
+    println!("speaker candidates entered: {:?}", speaker_candidates);
+
     speaker_candidates
 }
 

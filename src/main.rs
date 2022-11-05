@@ -5,14 +5,17 @@ pub mod temperature;
 pub mod lyrics;
 pub mod fibonacci;
 pub mod speaker_randomizer;
+pub mod std_collections;
 
 fn main() {
     println!("What would you like to do?");
-    println!("Play the Guessing Game [1]");
-    println!("Convert the current temperature [2]");
-    println!("Sing me a Christmas song [3]");
-    println!("Print the fibonacci sequence [4]");
-    println!("Randomize speakers [5]");
+    println!("[1] Play the Guessing Game");
+    println!("[2] Convert the current temperature");
+    println!("[3] Sing me a Christmas song");
+    println!("[4] Print the fibonacci sequence");
+    println!("[5] Randomize speakers");
+    println!("[6] Find the median of a set of numbers. Enter a white space separated list of numbers.");
+    println!("[7] Find the mode of a set of number. Enter a white space separated list of numbers.");
 
     let mut answer = String::new();
 
@@ -32,6 +35,10 @@ fn main() {
         fibonacci::calculate_fibonacci();
     } else if answer == "5" {
         speaker_randomizer::randomize_names();
+    } else if answer == "6" {
+        std_collections::find_median();
+    } else if answer == "7" {
+        std_collections::find_mode();
     } else {
         println!("Aww you didn't choose an option... Till next time!");
     }
