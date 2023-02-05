@@ -1,16 +1,22 @@
+use std::io;
+
 pub fn translate_to_pig_latin() {
 	// TODO: take in input: text to translate
-	let untranslated_text = "raw text with a vowel like apple";
+	let mut answer = String::new();
+
+	println!("Enter the text you would like to translate to pig latin.");
+	io::stdin()
+		.read_line(&mut answer)
+		.expect("failed to read line");
+
+	let untranslated_text = answer.trim();
 	let mut translated_text = String::new();
 	let mut word: Vec<char> = Vec::new();
 
 	for (i, char) in untranslated_text.chars().enumerate() {
-		println!("char --- {}", char);
 		word.push(char);
 
 		if char == ' ' || i == untranslated_text.chars().count() - 1 {
-			println!("white space");
-
 			match word[0] {
 				'a' | 'e' | 'i' | 'o' | 'u' => {
 					translated_text.push_str(&arrange_vowel_word(&mut word));
@@ -24,8 +30,7 @@ pub fn translate_to_pig_latin() {
 			continue;
 		}
 	};
-	println!("translated text {translated_text}");
-	// should print out: aw-ray ext-tay ith-way a-hay owel-vay ike-lay apple-hay
+	println!("Translated text: {translated_text}");
 }
 
 fn arrange_vowel_word(word: &mut Vec<char>) -> String {
@@ -35,12 +40,12 @@ fn arrange_vowel_word(word: &mut Vec<char>) -> String {
 		pig_latinized.push(*letter);
 	};
 
+	pig_latinized = pig_latinized.trim().to_string();
 	pig_latinized.push_str("-hay ");
 	pig_latinized
 }
 
 fn arrange_consonant_word(word: &mut Vec<char>) -> String {
-	println!("consonant word {:?}", word);
 	let mut pig_latinized = String::new();
 	let pig_suffix = String::from("-") + &String::from(word[0]) + "ay ";
 
@@ -51,6 +56,7 @@ fn arrange_consonant_word(word: &mut Vec<char>) -> String {
 		pig_latinized.push(*letter);
 	};
 
+	pig_latinized = pig_latinized.trim().to_string();
 	pig_latinized.push_str(&pig_suffix);
 	pig_latinized
 }
