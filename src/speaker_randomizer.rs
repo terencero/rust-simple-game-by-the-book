@@ -2,7 +2,7 @@ use std::{io, vec};
 use rand::Rng;
 
 pub fn randomize_names() {
-    let mut names = vec!["Val", "Ben", "JVE", "Anil", "Sonika", "tRo", "Brandon", "Nadiya", "Andre"];
+    let mut names = vec!["Val", "Ben", "JVE", "Sri", "tRo", "Brandon", "Nadiya"];
     let mut answer = String::new();
 
     println!("Generate all speaker names [1] or get one [2]?");

@@ -5,7 +5,8 @@ pub mod temperature;
 pub mod lyrics;
 pub mod fibonacci;
 pub mod speaker_randomizer;
-pub mod std_collections;
+pub mod common_collections;
+pub mod pig_latin;
 
 fn main() {
     println!("What would you like to do?");
@@ -16,6 +17,7 @@ fn main() {
     println!("[5] Randomize speakers");
     println!("[6] Find the median of a set of numbers. Enter a white space separated list of numbers.");
     println!("[7] Find the mode of a set of number. Enter a white space separated list of numbers.");
+    println!("[8] Run the Pig Latin translator.");
 
     let mut answer = String::new();
 
@@ -36,9 +38,11 @@ fn main() {
     } else if answer == "5" {
         speaker_randomizer::randomize_names();
     } else if answer == "6" {
-        std_collections::find_median();
+        common_collections::find_median();
     } else if answer == "7" {
-        std_collections::find_mode();
+        common_collections::find_mode();
+    } else if answer == "8" {
+        pig_latin::translate_to_pig_latin();
     } else {
         println!("Aww you didn't choose an option... Till next time!");
     }
