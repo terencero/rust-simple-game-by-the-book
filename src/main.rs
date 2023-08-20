@@ -7,6 +7,7 @@ pub mod fibonacci;
 pub mod speaker_randomizer;
 pub mod common_collections;
 pub mod pig_latin;
+pub mod org_interface;
 
 fn main() {
     println!("What would you like to do?");
@@ -43,6 +44,8 @@ fn main() {
         common_collections::find_mode();
     } else if answer == "8" {
         pig_latin::translate_to_pig_latin();
+    } else if answer == "9" {
+        org_interface::init_org_app();
     } else {
         println!("Aww you didn't choose an option... Till next time!");
     }
