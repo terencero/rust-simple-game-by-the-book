@@ -25,6 +25,28 @@ pub fn init_org_app() {
         let all_members = get_all_members(&dept_name, &mut dept_map);
 
         println!("all members -> {:?}", all_members);
+
+        if all_members.is_empty() {
+            println!("There are no members in this department! \n
+                Would you like to add member(s)? [y/n]
+            ");
+
+            let mut answer = String::new();
+
+            io::stdin()
+                .read_line(&mut answer)
+                .expect("Failed to read your answer...");
+
+            let answer = answer.trim().to_lowercase();
+
+            if answer == "y" {
+                // take in names
+            } else if answer == "n" {
+                // return empty vec
+            } else {
+                // prompt user to answer with y/n
+            }
+        }
     }
 }
 // create a department
@@ -38,16 +60,26 @@ fn get_all_members<'a>(
     dept_name: &'a str, 
     dept: &'a mut HashMap<&'a str, Vec<&'a str>>,
 ) -> &'a mut Vec<&'a str> {
-    let default_param = vec!["no members"];
-
-    let res = dept.entry(dept_name).or_insert(default_param);
-    res
+    dept.entry(dept_name).or_insert(vec![])
 }
 
 
 // read all members of all departments sorted by department
 
 // add a member to a department
+fn add_members_to_department(
+    dept_name: &str,
+    dept: &mut HashMap<&str, Vec<&str>>,
+    names: &str,
+) {
+    // name of dept
+    // reference to department hash map
+    // name or names of people to add, keep it simple first name only for now
+
+    // add name(s) to hash map
+    let added_dept = 
+    // return hash map
+}
 
 // read a member of a department
 

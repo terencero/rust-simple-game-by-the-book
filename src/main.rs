@@ -19,6 +19,7 @@ fn main() {
     println!("[6] Find the median of a set of numbers. Enter a white space separated list of numbers.");
     println!("[7] Find the mode of a set of number. Enter a white space separated list of numbers.");
     println!("[8] Run the Pig Latin translator.");
+    println!("[9] Interact with organization directory.");
 
     let mut answer = String::new();
 
