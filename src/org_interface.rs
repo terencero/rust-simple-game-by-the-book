@@ -3,7 +3,7 @@ use std::{collections::HashMap, io, vec};
 
 // entry - reads text based input to perform one of CRUD
 pub fn init_org_app() {
-    let mut dept_map: HashMap<&str, Vec<&str>> = HashMap::new();
+    let mut dept_map: HashMap<String, Vec<String>> = HashMap::new();
     let mut answer = String::new();
 
     println!("[1] To list all members of a department.");
@@ -22,7 +22,7 @@ pub fn init_org_app() {
             .read_line(&mut dept_name)
             .expect("Failed to read message.");
 
-        let all_members = get_all_members(&dept_name, &mut dept_map);
+        let all_members = get_all_members(dept_name, dept_map);
 
         println!("all members -> {:?}", all_members);
 
@@ -56,11 +56,12 @@ pub fn init_org_app() {
 
 // read all members of a department
 // don't understand lifetime params yet... just following the compiler recommendations  
-fn get_all_members<'a>(
-    dept_name: &'a str, 
-    dept: &'a mut HashMap<&'a str, Vec<&'a str>>,
-) -> &'a mut Vec<&'a str> {
-    dept.entry(dept_name).or_insert(vec![])
+fn get_all_members(
+    dept_name: String, 
+    mut dept: HashMap<String, Vec<String>>,
+) -> HashMap<String, Vec<String>> {
+    dept.entry(dept_name).or_insert(vec!["aa".to_string()]);
+    dept
 }
 
 
@@ -68,16 +69,18 @@ fn get_all_members<'a>(
 
 // add a member to a department
 fn add_members_to_department(
-    dept_name: &str,
-    dept: &mut HashMap<&str, Vec<&str>>,
-    names: &str,
-) {
+    dept_name: String,
+    mut dept: HashMap<String, Vec<String>>,
+    names: Vec<String>,
+) -> HashMap<String, Vec<String>> {
     // name of dept
     // reference to department hash map
     // name or names of people to add, keep it simple first name only for now
 
     // add name(s) to hash map
-    let added_dept = 
+    dept.entry(dept_name).or_insert(names);
+
+    dept
     // return hash map
 }
 
